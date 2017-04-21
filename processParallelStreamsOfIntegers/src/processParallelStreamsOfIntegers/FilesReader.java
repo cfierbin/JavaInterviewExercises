@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilesReader implements Reader{
+public class FilesReader extends Thread implements Reader{
 	
 	private List<Integer> list;
 	private File file;
@@ -16,6 +16,15 @@ public class FilesReader implements Reader{
 	FilesReader(String fileName){
 		file = new File(fileName);
 		list = new ArrayList<Integer>();
+	}
+	
+	@Override
+	public void run(){
+		read();
+	}
+
+	public synchronized List<Integer> getList() {
+		return list;
 	}
 
 	@Override
