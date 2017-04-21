@@ -1,0 +1,12 @@
+package processParallelStreamsOfIntegers;
+
+public class Program {
+
+	public static void main(String[] args) {
+		FilesReader fr = new FilesReader("..\\..\\data\\firstFile.txt");
+
+	}
+
+}
+D:\JavaInterviewExercises\processParallelStreamsOfIntegers\src\processParallelStreamsOfIntegers
+D:\JavaInterviewExercises\processParallelStreamsOfIntegers\data\firstFile.txt
