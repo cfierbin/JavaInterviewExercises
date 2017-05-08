@@ -1,5 +1,9 @@
 package parallelStreamsOfIntegers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -7,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 public class TestProgram {
 	
@@ -35,14 +40,26 @@ public class TestProgram {
 	
 	//http://stackoverflow.com/questions/1844688/read-all-files-in-a-folder
 	
-		CallableFilesReader cfr = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
-		CallableFilesReader cfr2 = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
-		
-		ExecutorService executor = Executors.newFixedThreadPool(10);		
-		List<Callable<Integer>> callableTasks = new ArrayList<>();		
-		
-		callableTasks.add(cfr);
-		callableTasks.add(cfr2);
+	ExecutorService executor = Executors.newFixedThreadPool(10);		
+	List<Callable<Integer>> callableTasks = new ArrayList<>();		
+	
+	try(Stream<Path> paths = Files.walk(Paths.get("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data"))) {
+	    paths.forEach(filePath -> {
+	        if (Files.isRegularFile(filePath)) {
+	            System.out.println(filePath);
+	            callableTasks.add(new CallableFilesReader(filePath.toString()));
+	        }
+	    });
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} 
+	
+//		CallableFilesReader cfr = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
+//		CallableFilesReader cfr2 = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
+						
+//		callableTasks.add(cfr);
+//		callableTasks.add(cfr2);
 		
 		try {
 			List<Future<Integer>> futures = executor.invokeAll(callableTasks);
