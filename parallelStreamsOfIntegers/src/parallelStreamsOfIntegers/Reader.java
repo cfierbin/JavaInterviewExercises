@@ -1,4 +1,4 @@
-package processParallelStreamsOfIntegers;
+package parallelStreamsOfIntegers;
 
 import java.util.List;
 

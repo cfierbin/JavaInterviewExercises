@@ -1,5 +1,0 @@
-package processParallelStreamsOfIntegers;
-
-public interface Reader {
-
-}

@@ -1,4 +1,4 @@
-package processParallelStreamsOfIntegers;
+package parallelStreamsOfIntegers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-public class Program {
+public class TestProgram {
 	
 	private static int sum;
 
@@ -33,8 +33,10 @@ public class Program {
 		fr.getList().forEach(i->System.out.println(i));
 		*/
 	
-		CallableFilesReader cfr = new CallableFilesReader("D:\\JavaInterviewExercises\\processParallelStreamsOfIntegers\\data\\firstFile.txt");
-		CallableFilesReader cfr2 = new CallableFilesReader("D:\\JavaInterviewExercises\\processParallelStreamsOfIntegers\\data\\firstFile.txt");
+	//http://stackoverflow.com/questions/1844688/read-all-files-in-a-folder
+	
+		CallableFilesReader cfr = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
+		CallableFilesReader cfr2 = new CallableFilesReader("D:\\JavaInterviewExercises\\parallelStreamsOfIntegers\\data\\firstFile.txt");
 		
 		ExecutorService executor = Executors.newFixedThreadPool(10);		
 		List<Callable<Integer>> callableTasks = new ArrayList<>();		
