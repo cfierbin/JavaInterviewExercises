@@ -21,6 +21,13 @@ public class TestMain {
 		Map<List<Employee>, ? extends Employee> groupsOfPeople = new HashMap<>();
         
    //     groupsOfPeople.put(new ArrayList<Employee>(Arrays.asList(new Employee())), new Manager());
+		
+		Map<Integer, List<String>> map = new HashMap<>();
+		map.put(3, new ArrayList<>(Arrays.asList("1","2")));
+		map.putIfAbsent(3,  new ArrayList<>()).add("3");
+		
+		map.forEach((i, list) ->
+		list.forEach(s -> System.out.println(s)));
 	
 
 
